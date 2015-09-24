@@ -32,6 +32,7 @@ gem 'turbolinks'
 
 # Use the Bootstrap Framework for styling
 gem 'bootstrap-sass'
+gem 'font-awesome-rails'
 
 
 
