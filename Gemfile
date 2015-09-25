@@ -15,6 +15,7 @@ end
 group :development do
   gem 'sqlite3'
   gem 'awesome_print'
+  gem 'pry-rails'
 end
 
 # Use SCSS for stylesheets
