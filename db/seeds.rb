@@ -1,11 +1,13 @@
 include RandomData
 
-50.times do
-  
-  Post.create!(
-    title: RandomData.random_sentence,
-    body: RandomData.random_paragraph
-  )
+50.times do |n|
+  if (n + 1) % 5 == 0
+    Post.create!(title: "CENSORED", body: RandomData.random_paragraph)
+  else
+    Post.create!(
+      title: RandomData.random_sentence,
+      body: RandomData.random_paragraph)
+  end
 end
 
 post = Post.find_or_create_by(title: "Bloc", body: "The Bloc program is intense!")
