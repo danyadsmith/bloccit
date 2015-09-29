@@ -14,13 +14,33 @@
   <li><%= link_to "About", about_path %></li>
 </ul>
 
+  <% if flash[:notice] %>
+  <div class="alert alert-success">
+    <button type="button" class="close" data-dismiss="alert">&times; 
+    <%= flash[:notice] %>
+    </button>
+  </div>
+  <% elsif flash[:error] %>
+  <div class="alert alert-danger">
+    <button type="button" class="close" data-dismiss="alert">&times; 
+    <%= flash[:error] %>
+    </button>
+  </div>
+  <% elsif flash[:alert] %>
+  <div class="alert alert-warning">
+    <button type="button" class="close" data-dismiss="alert">&times; 
+    <%= flash[:alert] %>
+    </button>
+  </div>
+  <% end %>
+
 <%= yield %>
 
 <div class="social">
-  <button class="btn btn-default"><%= link_to " GitHub", "https://github.com/danyadsmith", class: "fa fa-github" %></button>
-  <button class="btn btn-default"><%= link_to " LinkedIn", "https://github.com/danyadsmith", class: "fa fa-linkedin-square" %></button>
-  <button class="btn btn-default"><%= link_to " Tumblr", "https://www.tumblr.com/blog/danyadsmith", class: "fa fa-tumblr" %></button>
-  <button class="btn btn-default"><%= link_to " Twitter", "https://twitter.com/danyadsmith", class: "fa fa-twitter" %></button>
+  <button class="btn btn-default btn-xs"><%= link_to " GitHub", "https://github.com/danyadsmith", class: "fa fa-github" %></button>
+  <button class="btn btn-default btn-xs"><%= link_to " LinkedIn", "https://github.com/danyadsmith", class: "fa fa-linkedin-square" %></button>
+  <button class="btn btn-default btn-xs"><%= link_to " Tumblr", "https://www.tumblr.com/blog/danyadsmith", class: "fa fa-tumblr" %></button>
+  <button class="btn btn-default btn-xs"><%= link_to " Twitter", "https://twitter.com/danyadsmith", class: "fa fa-twitter" %></button>
 </div>
 </div>
 </body>
