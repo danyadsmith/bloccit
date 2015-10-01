@@ -1,5 +1,9 @@
 include RandomData
 
+5.times do 
+  Advertisement.create!(title: RandomData.random_sentence, copy: RandomData.random_paragraph, price: 10)
+end
+
 50.times do |n|
   if (n + 1) % 5 == 0
     Post.create!(title: "CENSORED", body: RandomData.random_paragraph)
@@ -25,3 +29,4 @@ comment = Comment.find_or_create_by(post: post, body: "This is my assignment com
 puts "Seed finished"
 puts "#{Post.count} posts created"
 puts "#{Comment.count} comments created"
+puts "#{Advertisement.count} advertisements created"
