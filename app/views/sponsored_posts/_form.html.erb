@@ -1,0 +1,6 @@
+    <%= simple_form_for [topic, sponsored_post] do |f| %>
+      <%= f.input :title %>
+      <%= f.input :body %>
+      <%= f.input :price %>
+      <%= f.button :submit, class: 'btn-success' %>
+    <% end %>  

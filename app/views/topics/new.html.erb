@@ -10,10 +10,6 @@
     </ul>
   </div>
   <div class="col-md-8">
-    <%= simple_form_for @topic do |f| %>
-      <%= f.input :name %>
-      <%= f.input :description %>
-      <%= f.button :submit, class: "btn-success" %>
-    <% end %>
+    <%= render partial: 'form', locals: { topic: @topic } %>
   </div>
 </div>

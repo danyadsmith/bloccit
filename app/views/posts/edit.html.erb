@@ -10,10 +10,6 @@
     </ul>
   </div>
   <div class="col-md-8">
-    <%= simple_form_for [@post.topic, @post] do |f| %>
-      <%= f.input :title %>
-      <%= f.input :body %>
-      <%= f.button :submit, class: 'btn-success' %>
-    <% end %>
+    <%= render partial: 'form', locals: { topic: @post.topic, post: @post } %>
   </div>
 </div>
