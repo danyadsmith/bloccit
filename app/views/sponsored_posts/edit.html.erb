@@ -1,0 +1,20 @@
+<h1>Edit Sponsored Post</h1>
+
+<div class="row">
+  <div class="col-md-4">
+    <p>Guidelines for sponsored posts</p>
+    <ul>
+      <li>Make sure that it rhymes.</li>
+      <li>Don't use the letter "A".</li>
+      <li>The incessant use of hashtags will get you banned.</li>
+    </ul>
+  </div>
+  <div class="col-md-8">
+    <%= simple_form_for [@sponsored_post.topic, @sponsored_post] do |f| %>
+      <%= f.input :title %>
+      <%= f.input :body %>
+      <%= f.input :price %>
+      <%= f.button :submit, class: 'btn-success' %>
+    <% end %>
+  </div>
+</div>
