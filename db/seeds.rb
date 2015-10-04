@@ -1,22 +1,30 @@
 include RandomData
 
+#Create Ads
 5.times do 
   Advertisement.create!(title: RandomData.random_sentence, copy: RandomData.random_paragraph, price: 10)
 end
 
-50.times do |n|
-  if (n + 1) % 5 == 0
-    Post.create!(title: "CENSORED", body: RandomData.random_paragraph)
-  else
-    Post.create!(
-      title: RandomData.random_sentence,
-      body: RandomData.random_paragraph)
-  end
+#Create Topics
+15.times do
+  Topic.create!(
+    name: RandomData.random_sentence,
+    description: RandomData.random_paragraph
+  )
 end
+topics = Topic.all
 
-post = Post.find_or_create_by(title: "Bloc", body: "The Bloc program is intense!")
+# Create Posts
+50.times do |n|
+    Post.create!(
+      topic: topics.sample,
+      title: RandomData.random_sentence,
+      body: RandomData.random_paragraph
+    )
+end
 posts = Post.all
 
+# Create Comments
 100.times do
   Comment.create!(
     post: posts.sample,
@@ -24,13 +32,13 @@ posts = Post.all
   )
 end
 
+# Create Questions
 25.times do
   Question.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph)
 end
 
-comment = Comment.find_or_create_by(post: post, body: "This is my assignment comment.")
-
 puts "Seed finished"
+puts "#{Topic.count} topics created"
 puts "#{Post.count} posts created"
 puts "#{Comment.count} comments created"
 puts "#{Question.count} questions created"

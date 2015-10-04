@@ -11,6 +11,7 @@
 <div class="container">
 <ul class="nav nav-tabs">
   <li><%= link_to "Home", root_path %></li>
+  <li><%= link_to "Topics", topics_path %></li>
   <li><%= link_to "About", about_path %></li>
 </ul>
 
@@ -36,7 +37,7 @@
 
 <%= yield %>
 
-<div class="social">
+<div class="social" style="margin:4em 0 1em 0">
   <button class="btn btn-default btn-xs"><%= link_to " GitHub", "https://github.com/danyadsmith", class: "fa fa-github" %></button>
   <button class="btn btn-default btn-xs"><%= link_to " LinkedIn", "https://github.com/danyadsmith", class: "fa fa-linkedin-square" %></button>
   <button class="btn btn-default btn-xs"><%= link_to " Tumblr", "https://www.tumblr.com/blog/danyadsmith", class: "fa fa-tumblr" %></button>

@@ -10,6 +10,7 @@ end
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
+  gem 'shoulda-matchers'
 end
 
 group :development do
@@ -17,6 +18,9 @@ group :development do
   gem 'awesome_print'
   gem 'pry-rails'
 end
+
+# Use Simple Form for forms
+gem 'simple_form'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'

@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
 
   resources :advertisements, only: [:index, :show, :new, :create]
-
-  resources :posts
+  resources :topics do
+    resources :posts, except: [:index]
+  end
 
   resources :questions
 
