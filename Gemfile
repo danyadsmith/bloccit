@@ -40,8 +40,5 @@ gem 'turbolinks'
 gem 'bootstrap-sass'
 gem 'font-awesome-rails'
 
-# Use the Bcrypt gem for password encryption
+# Use BCrypt for password encryption
 gem 'bcrypt'
-
-
-
