@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   
   resources :questions
 
+  post 'confirm' => 'users#confirm'
+  
   get 'about' => 'welcome#about'
 
   get 'welcome/contact'

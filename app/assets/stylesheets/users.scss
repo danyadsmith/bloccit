@@ -1,3 +1,7 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+dl { margin:20px 0; display:block; width:100%;}
+dt {display: inline-block; font-weight:bold; float:left; clear:left; width:5em;padding:10px 0;}
+dd {display: inline-block; font-weight:normal; float:left; padding:10px 0 10px 2em; width:90%;}
+input[type="submit"] {margin:0 5px !important;}
