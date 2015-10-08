@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  has_many :posts
 
   before_save { self.email = email.downcase }
   before_create { self.name = formatName(self.name) }
