@@ -30,8 +30,7 @@ class SponsoredPostsController < ApplicationController
 
   def update
     @sponsored_post = SponsoredPost.find(params[:id])
-    @sponsored_post.title = params[:sponsored_post][:title]
-    @sponsored_post.body = params[:sponsored_post][:body]
+    @sponsored_post.assign_attributes(sponsored_post_params)
 
     if @sponsored_post.save
       flash[:notice] = "Post was updated."
