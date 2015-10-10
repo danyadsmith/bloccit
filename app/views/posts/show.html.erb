@@ -1,5 +1,5 @@
 <h1>
-  <%= @post.title %>
+  <%= @post.title %><br />
   <small>
     submitted <%= time_ago_in_words(@post.created_at) %> ago by <%= @post.user.name %>
   </small>
@@ -7,6 +7,13 @@
 <div class="row">
   <div class="col-md-8">
     <p><%= @post.body %></p>
+
+    <h3>Comments</h3>
+    <%= render @post.comments %>
+  
+  <% if current_user %>
+  <%= render 'comments/form', comment: Comment.new, post: @post %>
+  <% end %>
   </div>
   <div class="col-md-4">
     <%= link_to "Edit", edit_topic_post_path(@post.topic, @post), class: 'btn btn-success' %>
