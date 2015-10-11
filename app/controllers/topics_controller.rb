@@ -2,14 +2,13 @@ class TopicsController < ApplicationController
 
   before_action :require_sign_in, except: [:index, :show]
   before_action :authorize_user, except: [:index, :show]
-
+  before_action :load_topic, only: [:show, :edit, :update, :destroy]
 
   def index
     @topics = Topic.all
   end
 
   def show
-    @topic = Topic.find(params[:id])
   end
 
   def new
@@ -17,7 +16,7 @@ class TopicsController < ApplicationController
       @topic = Topic.new
     else
       flash[:error] = "Moderators cannot create topics."
-      redirect_to action: :index
+      redirect_to topics_path
     end
   end
 
@@ -32,20 +31,15 @@ class TopicsController < ApplicationController
       end
     else
       flash[:error] = "Moderators cannot create topics."
-      redirect_to action: :index
+      redirect_to topics_path
     end
   end
 
   def edit
-    @topic = Topic.find(params[:id])
   end
 
   def update
-    @topic = Topic.find(params[:id])
-
-    @topic.name = params[:topic][:name]
-    @topic.description = params[:topic][:description]
-    @topic.public = params[:topic][:public]
+    @topic.assign_attributes(topic_params)
 
     if @topic.save
       flash[:notice] = "Topic was updated."
@@ -58,7 +52,6 @@ class TopicsController < ApplicationController
 
   def destroy
     if current_user.admin?
-      @topic = Topic.find(params[:id])
 
       if @topic.destroy
         flash[:notice] = "\"#{@topic.name}\" was deleted successfully."
@@ -69,27 +62,25 @@ class TopicsController < ApplicationController
       end
     else
       flash[:error] = "Moderators cannot delete topics."
-      redirect_to action: :index        
+      redirect_to topics_path        
     end
 
   end
 
   private
 
+  def load_topic
+    @topic = Topic.find(params[:id])
+  end
+
   def topic_params
     params.require(:topic).permit(:name, :description, :public)
   end
 
   def authorize_user
-
-    if params[:action] == "destroy" && current_user.admin? == false
-      flash[:error] = "You must be an admin to do that."
-      redirect_to topics_path
-    else
       unless current_user.admin? || current_user.moderator?
         flash[:error] = "You must be an admin to do that."
         redirect_to topics_path
       end      
-    end      
   end
 end

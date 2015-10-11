@@ -2,18 +2,17 @@ class PostsController < ApplicationController
 
   before_action :require_sign_in, except: :show
   before_action :authorize_user, except: [:show, :new, :create]
+  before_action :load_topic, only: [:new, :show, :create]
+  before_action :load_post, only: [:show, :edit, :update, :destroy]
 
   def show
-    @post = Post.find(params[:id])
   end
 
   def new
-    @topic = Topic.find(params[:topic_id])
     @post = Post.new
   end
 
   def create
-    @topic = Topic.find(params[:topic_id])
     @post = @topic.posts.build(post_params)
     @post.user = current_user
 
@@ -27,11 +26,9 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find(params[:id])
   end
 
   def update
-    @post = Post.find(params[:id])
     @post.assign_attributes(post_params)
 
     if @post.save
@@ -44,8 +41,6 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:id])
-
     if @post.destroy
       flash[:notice] = "\"#{@post.title}\" was deleted successfully."
       redirect_to @post.topic
@@ -56,6 +51,14 @@ class PostsController < ApplicationController
   end
 
   private
+
+  def load_post
+    @post = Post.find(params[:id])
+  end
+
+  def load_topic
+    @topic = Topic.find(params[:topic_id])
+  end
 
   def post_params
     params.require(:post).permit(:title, :body)
