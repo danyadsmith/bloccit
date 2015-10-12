@@ -1,5 +1,6 @@
-<%= simple_form_for [topic, post] do |f| %>
-<%= f.input :title %>
-<%= f.input :body %>
+<%= simple_form_for topic_posts_path do |f| %>
+<%= f.input :title, placeholder: "Enter post title" %>
+<%= f.input :body, placeholder: "Enter post body" %>
+<%= render :partial=> 'labels/form', :locals => {:f => f, :topic => topic, :labels => labels} %>
 <%= f.button :submit, class: 'btn-success' %>
 <% end %>

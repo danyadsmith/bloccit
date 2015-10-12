@@ -3,6 +3,7 @@ class TopicsController < ApplicationController
   before_action :require_sign_in, except: [:index, :show]
   before_action :authorize_user, except: [:index, :show]
   before_action :load_topic, only: [:show, :edit, :update, :destroy]
+  before_action :load_labels, only: [:create, :update]
 
   def index
     @topics = Topic.all
@@ -71,6 +72,10 @@ class TopicsController < ApplicationController
 
   def load_topic
     @topic = Topic.find(params[:id])
+  end
+
+  def load_labels
+    @topic.labels = Label.update_labels(params[:topic][:labels])
   end
 
   def topic_params

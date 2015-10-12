@@ -4,6 +4,7 @@ class PostsController < ApplicationController
   before_action :authorize_user, except: [:show, :new, :create]
   before_action :load_topic, only: [:new, :show, :create]
   before_action :load_post, only: [:show, :edit, :update, :destroy]
+  before_action :load_labels, only: [:create, :update]
 
   def show
   end
@@ -54,6 +55,10 @@ class PostsController < ApplicationController
 
   def load_post
     @post = Post.find(params[:id])
+  end
+
+  def load_labels
+    @post.labels = Label.update_labels(params[:post][:labels])
   end
 
   def load_topic
