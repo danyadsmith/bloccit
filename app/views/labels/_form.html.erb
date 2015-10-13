@@ -1,1 +1,1 @@
-<%= f.input :labels, placeholder: 'Enter labels (separated by commas)', value: labels.map(&:name).join(", ") %>
+<%= f.input :labels, placeholder: 'Enter labels (separated by commas)', input_html: {value: labels.map(&:name).join(", ")} %>
