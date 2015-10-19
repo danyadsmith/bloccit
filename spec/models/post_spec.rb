@@ -5,6 +5,7 @@ RSpec.describe Post, type: :model do
   let(:topic) {Topic.create!(name: RandomData.random_sentence, description: RandomData.random_paragraph)}
   let(:user) { User.create!(name: "Bloccit User", email: "user@bloccit.com", password: "helloworld") }
   let(:post) {topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: user) }
+  let(:author_post) {topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: user) }
 
   it { should have_many(:labelings) }
   it { should have_many(:labels).through(:labelings) }
@@ -79,6 +80,13 @@ RSpec.describe Post, type: :model do
         post.votes.create!(value: -1)
         expect(post.rank).to eq (old_rank - 1)
       end
+    end
+  end
+
+  describe "automated author voting" do    
+    it "increments the number of votes by 1 with an automated vote by the post author" do
+        author_post.votes.create!(value: 1)
+        expect(author_post.votes.where(value: 1, user: user).count).to eq (1)
     end
   end
 end
