@@ -1,7 +1,9 @@
 <h1>
   <%= @post.title %><br />
   <small>
-    submitted <%= time_ago_in_words(@post.created_at) %> ago by <%= @post.user.name %>
+    submitted <%= time_ago_in_words(@post.created_at) %> ago by <%= @post.user.name %> | 
+      <%=h render partial: "rates/list", locals: {rates: @post.rates } %>
+
   </small>
 </h1>
 <div class="row">

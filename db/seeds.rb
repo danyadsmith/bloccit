@@ -9,6 +9,10 @@ include RandomData
   )
 end
 
+6.times do |n|
+  rate = Rate.create!(stars: n)
+end
+
 users = User.all
 
 #Create Ads

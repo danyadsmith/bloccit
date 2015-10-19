@@ -2,5 +2,6 @@
 <%= f.input :title, placeholder: "Enter post title" %>
 <%= f.input :body, placeholder: "Enter post body" %>
 <%= render :partial=> 'labels/form', :locals => {:f => f, :topic => topic, :labels => labels} %>
+<%= render :partial=> 'rates/form', :locals => {:f => f, :rates => @post.rates } %>
 <%= f.button :submit, class: 'btn-success' %>
 <% end %>

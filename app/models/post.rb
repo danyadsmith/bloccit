@@ -5,6 +5,8 @@ class Post < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   has_many :labelings, as: :labelable
   has_many :labels, through: :labelings
+  has_many :ratings, as: :rateable
+  has_many :rates, through: :ratings  
   
   scope :ordered_by_title, -> { Post.unscoped.order('title ASC') }
   scope :ordered_by_reverse_created_at, -> { Post.unscoped.order('created_at ASC') }
