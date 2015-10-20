@@ -8,6 +8,7 @@ class Post < ActiveRecord::Base
   has_many :ratings, as: :rateable
   has_many :rates, through: :ratings  
   has_many :votes, dependent: :destroy
+  has_many :favorites, dependent: :destroy
 
   scope :ordered_by_title, -> { Post.unscoped.order('title ASC') }
   scope :ordered_by_reverse_created_at, -> { Post.unscoped.order('created_at ASC') }
