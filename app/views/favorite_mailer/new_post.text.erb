@@ -1,0 +1,8 @@
+New Post Authored: "<%= @post.title %>"
+By: <%= @post.user.name %>
+
+The post you have authored on Bloccit has been automatically favorited to ensure that you
+receive an e-mail notification every time a user adds a comment to your post. If you do not
+want to receive these e-mails, please view the post and unfavorite.
+
+<%= link_to "View post on site", topic_post_url(@post.topic, @post) %>

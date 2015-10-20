@@ -90,4 +90,10 @@ RSpec.describe Post, type: :model do
         expect(author_post.votes.where(value: 1, user: user).count).to eq (1)
     end
   end
+
+  describe "after_create" do
+    it "automatically favorites a post when authored" do
+      expect(author_post.favorites.where(user: user)).to_not be_empty
+    end
+  end
 end
