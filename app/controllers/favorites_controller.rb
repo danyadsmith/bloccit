@@ -17,7 +17,7 @@ class FavoritesController < ApplicationController
 
   def destroy
     post = Post.find(params[:post_id])
-    favorite = current_user.favorites.find(params[:id])
+    favorite = current_user.favorites.find(post: post)
 
     if favorite.destroy
       flash[:notice] = "Post unfavorited."
