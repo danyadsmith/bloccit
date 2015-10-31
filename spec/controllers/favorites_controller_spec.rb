@@ -3,9 +3,9 @@ include RandomData
 include SessionsHelper
 
 RSpec.describe FavoritesController, type: :controller do
-  let(:my_user) { User.create!(name: "Bloccit User", email: "user@bloccit.com", password: "helloworld") }
-  let(:my_topic) { Topic.create!(name: RandomData.random_sentence, description: RandomData.random_paragraph) }
-  let(:my_post) {my_topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: my_user) }
+  let(:my_topic) { create(:topic) }
+  let(:my_user) { create(:user) }
+  let(:my_post) { create(:post, topic: my_topic, user: my_user) }
 
   context 'guest user' do
     describe 'POST create' do
@@ -14,13 +14,13 @@ RSpec.describe FavoritesController, type: :controller do
         expect(response).to redirect_to(new_session_path)
       end
     end
-  end
-
-  describe 'DELETE destroy' do
-    it 'redirects the user to the sign in view' do
-      favorite = my_user.favorites.where(post: my_post).create
-      delete :destroy, { post_id: my_post.id, id: favorite.id }
-      expect(response).to redirect_to(new_session_path)
+  
+    describe 'DELETE destroy' do
+      it 'redirects the user to the sign in view' do
+        favorite = my_user.favorites.where(post: my_post).create
+        delete :destroy, { post_id: my_post.id, id: favorite.id }
+        expect(response).to redirect_to(new_session_path)
+      end
     end
   end
   
@@ -49,9 +49,10 @@ RSpec.describe FavoritesController, type: :controller do
       end
 
       it 'destroys the favorite for the current user and post' do
-        new_favorite = my_user.favorites.where(post: my_post).create
-        delete :destroy, { post_id: my_post.id, id: new_favorite.id }
-        expect(my_user.favorites.find_by_post_id(my_post.id)).to be_nil
+        favorite = my_user.favorites.where(post: my_post).create
+        expect(my_user.favorites.find_by_post_id(my_post.id) ).not_to be_nil
+        delete :destroy, { post_id: my_post.id, id: favorite.id }
+        expect(my_user.favorites.find_by_post_id(my_post.id) ).to be_nil
       end
     end
   end

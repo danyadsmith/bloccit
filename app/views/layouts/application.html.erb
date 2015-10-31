@@ -16,11 +16,13 @@
 
   <% if current_user %>
     <li class="pull-right user-info">
-      <%= image_tag (avatar_url(current_user)), alt: current_user.name, size: "42x42" %>
+    <%= link_to "Sign Out", session_path(current_user), method: :delete  %>
+    </li>
+    <li class="pull-right user-info">
+      <%= image_tag (User.avatar_url(current_user, 42)), class: "gravatar", alt: current_user.name %>
     </li>  
     <li class="pull-right user-info">
-      <%= link_to "#{current_user.name} - Sign Out", session_path(current_user), method: :delete %>
-
+      <%= link_to current_user.name, user_path(current_user) %>
     </li>      
   <% else %>
     <li class="pull-right user-info">
