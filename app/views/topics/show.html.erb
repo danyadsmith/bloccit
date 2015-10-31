@@ -19,7 +19,6 @@
   <hr />
     <h3><%= @topic.posts.count %> Posts</h3>
     <% @topic.posts.each do |post| %>
-      <%= render partial: 'votes/voter', locals: { post: post } %>
       <%= render partial: 'posts/post', locals: { topic: @topic, post: post }  %>
     <% end %>
   </div>
