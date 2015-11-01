@@ -1,6 +1,6 @@
     <div class="row post-list ">
       <div class="media-body">
-        <%= render partial: 'votes/voter', locals: { post: post } %>
+        <%= render partial: 'votes/voter', locals: { post: post }, remote: true %>
         <h4 class="media-heading">
           <% avatar_url = User.avatar_url(post.user, 50) %>
           <% unless avatar_url.nil? %>
@@ -14,7 +14,7 @@
         <small>
           submitted <%= time_ago_in_words(post.created_at) %> ago  by <%= post.user.name %> &nbsp;|&nbsp; 
           <%= pluralize(post.comments.count, 'comment') %> &nbsp;|&nbsp;
-          <%= pluralize(post.votes.count, 'vote')%>   
+          <span class="js-post-votes-count"><%= pluralize(post.votes.count, 'vote')%></span> 
         </small>
       </div>
     </div>

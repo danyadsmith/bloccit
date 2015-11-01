@@ -3,12 +3,18 @@ class VotesController < ApplicationController
 
   def up_vote
     update_vote(1)
-    redirect_to :back
+    respond_to do |format|
+      format.html { redirect_to :back}
+      format.js
+    end    
   end
 
   def down_vote
-    update_vote(-1)
-    redirect_to :back
+    update_vote(-1)   
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.js
+    end    
   end
 
   private

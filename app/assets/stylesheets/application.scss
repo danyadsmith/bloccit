@@ -22,3 +22,12 @@
   margin-bottom: 15px;
 }
 
+a.up-vote:link,
+a.down-vote:link,
+a.up-vote:hover,
+a.down-vote:hover,
+a.up-vote:active,
+a.down-vote:active,
+ {
+  text-decoration: none;
+}

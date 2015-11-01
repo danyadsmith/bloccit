@@ -1,0 +1,5 @@
+$('#votes-'+'<%= @post.id %>').html("<%= @post.points %>").css({"color": "#00cc33", "font-weight": "bold"});
+$('.js-post-votes-count').html("<%= pluralize(@post.votes.count, 'vote') %>");
+$('.js-post-points-count').html("<%= pluralize(@post.points, 'point') %>");
+$('.js-post-up-votes-count').html("<%= pluralize(@post.up_votes, 'up vote') %>");
+$('.js-post-down-votes-count').html("<%= pluralize(@post.down_votes, 'down vote') %>");
