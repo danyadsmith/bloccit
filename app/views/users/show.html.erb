@@ -12,7 +12,7 @@
         <h2 class="media-heading"><%= @user.name %></h2>
         <small>
           <%= pluralize(@user.posts.count, 'post') %>
-          <%= pluralize(@user.comments.count, 'comment') %>
+          <div class="js-comments-count"><%= pluralize(@user.comments.count, 'comment') %></div>
         </small>
       </div>
     </div>
@@ -20,20 +20,22 @@
 </div>
 
 <% if has_authored_posts?(@user) %>
-  <h2>Posts</h2>
+  <h3>Posts</h3>
   <%= render @user.posts %>
 <% else %>
-  <h2><%= @user.name %> has not submitted any posts.</h2>
+  <h3><%= @user.name %> has not authored any posts.</h3>
 <% end %>
 
 <% if has_authored_comments?(@user) %>
-  <h2>Comments</h2>
+  <h3>Comments</h3>
   <%= render @user.comments %>
   <% else %>
-  <h2><%= @user.name %> has not submitted any comments.</h2>
+  <h3><%= @user.name %> has not submitted any comments.</h3>
 <% end %>
 
 <% if has_favorites?(@user) %>
-  <h2><%= @user.name %> has <%= @user.favorites.count %> favorites:</h2>
+  <h3><%= @user.name %> has <%= @user.favorites.count %> favorites:</h3>
   <%= render @favorite_posts  %>
+  <% else %>
+  <h3><%= @user.name %> has not selected any favorites.</h3>
 <% end %>
