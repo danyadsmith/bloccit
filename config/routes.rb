@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
-
-  resources :labels, only: [:show]
-
-  resources :rates, only: [:show]
   
+  resources :users, only: [:new, :create, :show]
+
+  resources :sessions, only: [:new, :create, :destroy]
+
   resources :topics do
     resources :posts, except: [:index]
+    resources :sponsored_posts
   end
 
   resources :posts, only: [] do
@@ -14,20 +15,16 @@ Rails.application.routes.draw do
     post '/up-vote' => 'votes#up_vote', as: :up_vote
     post '/down-vote' => 'votes#down_vote', as: :down_vote
   end
-  
-  resources :topics do
-    resources :sponsored_posts
-  end
 
-  resources :sponsored_posts
+  resources :labels, only: [:show]
 
-  resources :users, only: [:new, :create, :show]
-
-  resources :sessions, only: [:new, :create, :destroy]
+  resources :rates, only: [:show]
   
   resources :advertisements, only: [:index, :show, :new, :create]
   
-  resources :questions
+  resources :questions do
+    resources :answers
+  end
 
   post 'confirm' => 'users#confirm'
   
