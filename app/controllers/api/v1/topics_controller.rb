@@ -35,6 +35,20 @@ class Api::V1::TopicsController < Api::V1::BaseController
     end
   end
 
+  def create_post
+    topic = Topic.find(params[:id])
+    post = topic.posts.create(post_params)
+    post.topic_id = topic.id
+    post.user_id = @current_user.id
+
+    if post.valid?
+      post.save!
+      render json: post.to_json, status: 201
+    else
+      render json: { error: "Post is invalid", status: 400 }, status: 400
+    end    
+  end  
+
   def destroy
     topic = Topic.find(params[:id])
 
@@ -50,4 +64,8 @@ class Api::V1::TopicsController < Api::V1::BaseController
   def topic_params
     params.require(:topic).permit(:name, :description, :public)
   end
+
+  def post_params
+    params.require(:post).permit(:title, :body)
+  end  
 end
